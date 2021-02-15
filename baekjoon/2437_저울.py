@@ -23,8 +23,14 @@ def algorithm():
 
     for i in weights:
         if result<i:
-            print(result)
+            break
         result+=i
+    return result    
+
+if __name__ == "__main__":
+    N = int(input())
+    weights = list(map(int, input().split()))
+    print(algorithm())
     
 
 if __name__ == "__main__":
