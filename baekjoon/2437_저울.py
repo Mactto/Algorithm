@@ -24,8 +24,8 @@ def algorithm():
     for i in weights:
         if result<i:
             break
-        result+=i
-    return result    
+        result+=i 
+    return result   
 
 if __name__ == "__main__":
     N = int(input())
