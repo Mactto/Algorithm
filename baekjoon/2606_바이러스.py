@@ -12,6 +12,20 @@ def dfs(com):
             dfs(i)
 
 
+def bfs(com):
+    global count, visited
+
+    queue = [com]
+
+    while queue:
+        value = queue.pop(0)
+        count += 1
+        visited[com] = True
+        for i in range(1, N+1):
+            if not visited[i] and matrix[value][i] == 1:
+                queue.append(i)
+
+
 if __name__ == "__main__":
     N = int(input())
     E = int(input())
@@ -22,5 +36,6 @@ if __name__ == "__main__":
         x, y = map(int, input().split())
         matrix[x][y] = 1
         matrix[y][x] = 1
-    dfs(1)
+    # dfs(1)
+    bfs(1)
     print(count)
