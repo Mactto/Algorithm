@@ -1,11 +1,12 @@
 import sys
+from _collections import deque
 input = sys.stdin.readline
 
 def bfs(point):
-    queue = [point]
+    queue.append(point)
 
     while queue:
-        c, r = queue.pop(0)
+        c, r = queue.popleft()
         land[c][r] = 0
         for k in range(8):
             ndx = c + dx[k]
@@ -20,6 +21,7 @@ if __name__ == "__main__":
     dx = [-1, 1, 0, 0, -1, -1, 1, 1]
     dy = [0, 0, -1, 1, -1, 1, -1, 1]
     while w!=0 and h!=0:
+        queue = deque()
         count = 0
         w, h = map(int, input().split())
         land = [list(map(int, input().strip().split())) for _ in range(h)]
