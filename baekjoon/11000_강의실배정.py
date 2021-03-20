@@ -18,3 +18,4 @@ if __name__ == "__main__":
     arr = []
     time.sort(key=lambda x: x[0])
     print(algorithm())
+    
