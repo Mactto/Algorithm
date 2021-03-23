@@ -2,13 +2,16 @@ import sys
 input = sys.stdin.readline
 
 def algorithm(text):
-    for i in range(len(ucpc)):
-        if ucpc[i] in text:
-            idx = text.find(ucpc[i])
-            text = text[idx + 1:]
+    i = 0
+    for a in alp:
+        if a in s:
+            i += 1
+            s = s[s.index(a) + 1:]
         else:
-            return "I hate UCPC"
-    return "I lova UCPC"
+            print('I hate UCPC')
+            break
+    if i == 4:
+        print('I love UCPC')
 
 if __name__ == "__main__":
     text = input().rstrip()
