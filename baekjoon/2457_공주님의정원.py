@@ -14,7 +14,7 @@ def algorithm():
                 break
         for i in range(N):
             if flower[i][0] <= month:
-                if flower[i][0] != month or flower[i][0] <= day:
+                if flower[i][0] != month or flower[i][1] <= day:
                     if end_m <= flower[i][2]:
                         if end_m != flower[i][2] or end_d <= flower[i][3]:
                             end_m = flower[i][2]
