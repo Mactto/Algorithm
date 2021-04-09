@@ -10,7 +10,6 @@ def algorithm():
 
     answer = 0
     for i in range(N-K):
-        print(diff[i])
         answer += diff[i]
     return answer
         
