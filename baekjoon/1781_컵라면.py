@@ -2,6 +2,7 @@ import sys
 import heapq
 input = sys.stdin.readline
 
+# 데드라인 기준이 아닌 컵라면 개수를 기준으로 잡는다는 것이 핵심
 
 def algorithm(info):
     heap = []
