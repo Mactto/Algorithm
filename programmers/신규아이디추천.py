@@ -2,8 +2,6 @@ import re
 
 
 def solution(new_id):
-    answer = ''
-
     new_id = new_id.lower()
     new_id = re.sub(r"[^a-z0-9-_.]", "", new_id)
     new_id = re.sub(r"[.]+", ".", new_id)
@@ -16,9 +14,8 @@ def solution(new_id):
         new_id = re.sub(r"[.]$", "", new_id)
     if len(new_id) < 3:
         new_id += new_id[len(new_id)-1] * (3 - len(new_id))
-    print(new_id)
 
-    return answer
+    return new_id
 
 
 if __name__ == "__main__":
