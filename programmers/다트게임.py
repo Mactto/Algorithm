@@ -11,6 +11,7 @@ def solution(dartResult):
             if dart == '0':
                 continue
             elif dartResult[idx+1].isdigit():
+                
                 answer[flag] = int(dart) * 10
                 flag -= 1
             else:
