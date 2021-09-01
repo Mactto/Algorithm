@@ -1,35 +1,37 @@
 import sys
 input = sys.stdin.readline
 
+N = int(input())
+aparts = [list(input().strip()) for _ in range(N)]
+count = 0
+apart_nums = 0
+result = []
+dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
+
 
 def dfs(point):
-    global matrix, count
-
+    global aparts, apart_nums
     x, y = point
-    matrix[x][y] = '0'
-    count += 1
+    for k in range(4):
+        nx = x + dx[k]
+        ny = y + dy[k]
 
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0 <= nx < N and 0 <= ny < N:
-            if matrix[nx][ny] == '1':
-                dfs([nx, ny])
+        if 0 <= nx < N and 0 <= ny < N and aparts[ny][nx] == '1':
+            apart_nums += 1
+            aparts[ny][nx] = '2'
+            dfs([nx, ny])
 
 
-if __name__ == "__main__":
-    N = int(input())
-    matrix = [list(input().rstrip()) for _ in range(N)]
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
-    count = 0
-    result = []
-    for i in range(N):
-        for j in range(N):
-            if matrix[i][j] == '1':
-                count = 0
-                dfs([i, j])
-                result.append(count)
-    print(len(result))
-    for r in result:
-        print(r)
+for i in range(N):
+    for j in range(N):
+        if aparts[i][j] == '1':
+            apart_nums = 0
+            count += 1
+            dfs([j, i])
+            if count > 0 and apart_nums == 0:
+                apart_nums += 1
+            result.append(apart_nums)
+print(count)
+result.sort()
+for r in result:
+    print(r)
