@@ -2,20 +2,22 @@ import sys
 import heapq
 input = sys.stdin.readline
 
-def algorithm():
-    for i in range(N):
-        if len(arr) != 0 and arr[0] <= time[i][0]:
-            heapq.heappop(arr)
-        heapq.heappush(arr, time[i][1])
-
-    return len(arr)
-
-    
-
-if __name__ == "__main__":
+def solution():
     N = int(input())
-    time = [list(map(int, input().split())) for _ in range(N)]
-    arr = []
-    time.sort(key=lambda x: x[0])
-    print(algorithm())
-    
+    check_list = []
+    time_list = [list(map(int, input().split())) for _ in range(N)]
+
+    time_list.sort(key=lambda x: x[0])
+
+    heapq.heappush(check_list, time_list[0][1])
+
+    for i in range(1, N):
+        if time_list[i][0] < check_list[0]:
+            heapq.heappush(check_list, time_list[i][1])
+        else:
+            heapq.heappop(check_list)
+            heapq.heappush(check_list, time_list[i][1])
+
+    return len(check_list)
+
+print(solution())
