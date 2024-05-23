@@ -1,41 +1,31 @@
-import sys
-input = sys.stdin.readline
+from collections import deque
 
+N = int(input())
+M = int(input())
 
-def dfs(com):
-    global count, visited
-    count += 1
-    visited[com] = True
+networking = {}
 
-    for i in range(1, N+1):
-        if not visited[i] and matrix[com][i] == 1:
-            dfs(i)
+for n in range(1, N + 1):
+    networking[n] = set()
 
+for _ in range(M):
+    c1, c2 = map(int, input().split())
+    networking[c1].add(c2)
+    networking[c2].add(c1)
 
-def bfs(com):
-    global count, visited
-
-    queue = [com]
+def bfs(com_num):
+    queue = deque([com_num])
+    zombie_pc = set()
+    zombie_pc.add(com_num)
 
     while queue:
-        value = queue.pop(0)
-        count += 1
-        visited[com] = True
-        for i in range(1, N+1):
-            if not visited[i] and matrix[value][i] == 1:
-                queue.append(i)
+        computer = queue.popleft()
 
+        for c in networking[computer]:
+            if c not in zombie_pc:
+                queue.append(c)
+                zombie_pc.add(c)
 
-if __name__ == "__main__":
-    N = int(input())
-    E = int(input())
-    matrix = [[0] * (N+1) for _ in range(N+1)]
-    visited = [False] * (N+1)
-    count = -1
-    for _ in range(E):
-        x, y = map(int, input().split())
-        matrix[x][y] = 1
-        matrix[y][x] = 1
-    # dfs(1)
-    bfs(1)
-    print(count)
+    return len(zombie_pc) - 1
+
+print(bfs(1))
