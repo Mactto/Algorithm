@@ -1,32 +1,17 @@
 from collections import deque
-import sys
-input = sys.stdin.readline
 
 N, K = map(int, input().split())
-
-queue = deque()
-result = 0
-queue.append([N, 0])
-visited = set()
-
+visited = [False for _ in range(1000001)]
 
 def bfs():
-    global queue, result, visited
-    while queue:
-        point, time = queue.popleft()
-        if point not in visited:
-            visited.add(point)
+    queue = deque()
+    queue.append([N, 0])
+    visited[0] = True
 
-            time += 1
-            if point == K:
-                result = time - 1
-                break
-            else:
-                if point < K:
-                    queue.append([point * 2, time])
-                    queue.append([point + 1, time])
-                queue.append([point - 1, time])
+    while True:
+        position, prev_time = queue.popleft()
+        
+        
+        
 
-
-bfs()
-print(result)
+print(bfs())
