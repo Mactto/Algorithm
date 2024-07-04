@@ -1,22 +1,15 @@
-import sys
-input = sys.stdin.readline
+T = int(input())
 
-def algorithm():
-    ju = []
-    result = 0
-    for i in range(N-1):
-        if date[i] <= date[i+1]:
-            ju.append(date[i])
+for _ in range(T):
+    N = int(input())
+    price_list = list(map(int, input().split()))
+
+    max_income = 0
+    max_price = price_list[-1]
+    for i in range(N-2, -1, -1):
+        if price_list[i] >= max_price:
+            max_price = price_list[i]
         else:
-            for _ in range(len(ju)):
-                result += date[i] - ju.pop(0)
-    for j in ju:
-        result += date[len(date)-1] - j
-    return result
+            max_income = max_income + (max_price - price_list[i])
 
-if __name__ == "__main__":
-    tc = int(input())
-    for _ in range(tc):
-        N = int(input())
-        date = list(map(int, input().split()))
-        print(algorithm())
+    print(max_income)
