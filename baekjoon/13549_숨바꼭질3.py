@@ -1,41 +1,25 @@
-import heapq
+from collections import deque
 
-def dijkstra(start, end):
-    INF = int(1e9)  
-    distance = [INF] * (end + 1)
-    distance[start] = 0
+N, M = map(int, input().split())
 
-    pq = [(0, start)]  
+visited = [False for _ in range(100_001)]
 
-    while pq:
-        dist, now = heapq.heappop(pq)
+def bfs(start):
+    queue = deque([[start, 0]])
 
-        if distance[now] < dist:
-            continue
+    while queue:
+        num, count = queue.popleft()
+        if num == M:
+            return count
 
-        
-        next_pos = now - 1
-        if 0 <= next_pos <= end and distance[next_pos] > dist + 1:
-            distance[next_pos] = dist + 1
-            heapq.heappush(pq, (dist + 1, next_pos))
+        if num * 2 <= 100_000 and not visited[num * 2]:
+            queue.append([num*2, count])
+            visited[num*2] = True
+        if num - 1 > -1 and not visited[num - 1]:
+            queue.append([num-1, count + 1])
+            visited[num-1] = True
+        if num + 1 < 100_000 and not visited[num + 1]:
+            queue.append([num+1, count + 1])
+            visited[num+1] = True
 
-        
-        next_pos = now + 1
-        if 0 <= next_pos <= end and distance[next_pos] > dist + 1:
-            distance[next_pos] = dist + 1
-            heapq.heappush(pq, (dist + 1, next_pos))
-
-        
-        next_pos = now * 2
-        if 0 <= next_pos <= end and distance[next_pos] > dist:
-            distance[next_pos] = dist
-            heapq.heappush(pq, (dist, next_pos))
-
-    return distance[end]
-
-
-N, K = map(int, input().split())
-result = dijkstra(N, K)
-
-
-print(result)
+print(bfs(N))
